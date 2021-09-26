@@ -4,6 +4,13 @@
 CMakeFiles\NEAT.dir\conGene.cpp.obj: ..\conGene.cpp
 CMakeFiles\NEAT.dir\conGene.cpp.obj: ..\conGene.h
 
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\conGene.h
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\geneEnums.h
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\genome.cpp
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\genome.h
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\globals.h
+CMakeFiles\NEAT.dir\genome.cpp.obj: ..\nodeGene.h
+
 CMakeFiles\NEAT.dir\main.cpp.obj: ..\main.cpp
 
 CMakeFiles\NEAT.dir\nodeGene.cpp.obj: ..\geneEnums.h

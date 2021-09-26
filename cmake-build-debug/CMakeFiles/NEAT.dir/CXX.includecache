@@ -14,8 +14,26 @@ D:/CLionProjects/NEAT/conGene.h
 
 D:/CLionProjects/NEAT/geneEnums.h
 
-D:/CLionProjects/NEAT/main.cpp
+D:/CLionProjects/NEAT/genome.cpp
 iostream
+-
+genome.h
+D:/CLionProjects/NEAT/genome.h
+globals.h
+D:/CLionProjects/NEAT/globals.h
+nodeGene.h
+D:/CLionProjects/NEAT/nodeGene.h
+
+D:/CLionProjects/NEAT/genome.h
+conGene.h
+D:/CLionProjects/NEAT/conGene.h
+nodeGene.h
+D:/CLionProjects/NEAT/nodeGene.h
+vector
+-
+
+D:/CLionProjects/NEAT/globals.h
+random
 -
 
 D:/CLionProjects/NEAT/nodeGene.cpp

@@ -99,6 +99,9 @@
 		<Unit filename="D:/CLionProjects/NEAT/genome.h">
 			<Option target="NEAT"/>
 		</Unit>
+		<Unit filename="D:/CLionProjects/NEAT/globals.h">
+			<Option target="NEAT"/>
+		</Unit>
 		<Unit filename="D:/CLionProjects/NEAT/main.cpp">
 			<Option target="NEAT"/>
 		</Unit>

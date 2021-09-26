@@ -28,6 +28,8 @@ public:
     bool enable;
     // historical marker
     unsigned long long int innovationNumber;
+    // list initialization
+    conGene(unsigned  int in, unsigned int out, double w, bool e, unsigned long long int inno) : inputNode(in), outputNode(out), weight(w), enable(e), innovationNumber(inno) {};
 
 };
 

@@ -29,6 +29,8 @@ public:
     unsigned int nodeID;
     // if the node is input, output, or hidden
     nodeType type;
+    // initalizer
+    nodeGene(unsigned int ID, nodeType t, double b = 0.0) :nodeID(ID), type(t), bias(b){};
 
     // TODO: NOT IMPLEMENTED
     activationFunction actFunct = activationFunction::sigmoid;
