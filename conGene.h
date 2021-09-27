@@ -30,7 +30,8 @@ public:
     unsigned long long int innovationNumber;
     // list initialization
     conGene(unsigned  int in, unsigned int out, double w, bool e, unsigned long long int inno) : inputNode(in), outputNode(out), weight(w), enable(e), innovationNumber(inno) {};
-
+    //make life easy copy init
+    conGene(conGene* cpy): inputNode(cpy->inputNode), outputNode(cpy->outputNode), weight(cpy->weight), enable(cpy->enable), innovationNumber(cpy->innovationNumber){};
 };
 
 

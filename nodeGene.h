@@ -31,6 +31,8 @@ public:
     nodeType type;
     // initalizer
     nodeGene(unsigned int ID, nodeType t, double b = 0.0) :nodeID(ID), type(t), bias(b){};
+    // make life easy
+    nodeGene(nodeGene* cpy): nodeID(cpy->nodeID), type(cpy->type), bias(cpy->bias), actFunct(cpy->actFunct){};
 
     // TODO: NOT IMPLEMENTED
     activationFunction actFunct = activationFunction::sigmoid;

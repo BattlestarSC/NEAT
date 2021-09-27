@@ -46,14 +46,40 @@ genome::genome(int inSize, int outSize) {
     }
 }
 
+//So, because its unlikely this function will be used outside the clone and/or crossover functions, we can assume that
+//as such, its almost certain that all the connections and nodes will later be freed, so we need to copy all of them
+//yes, this could cause a memory leak.... TOO BAD
+//yes, this wastes CPU cycles... its easier to write it this way, and this is not production code, just for learning, so TOO BAD
+//is this bad practice? probably. Again, its just for learning
 genome::genome(int inSize, int outSize, std::vector<conGene *> initConnections, std::vector<nodeGene *> initNodes) {
+    this->inputSize = inSize;
+    this->outputSize = outSize;
 
+    // so just flatly copy everything
+    for (auto n : initNodes) {
+        this->nodes.push_back(new nodeGene(n));
+    }
+    for (auto c : initConnections) {
+        this->connections.push_back(new conGene(c));
+    }
 }
 
+// why is this a function? for future code clarity, not because its needed
 genome *genome::clone() {
-    return nullptr;
+    auto* g = new genome(this->inputSize, this->outputSize, this->connections, this->nodes);
+    return g;
 }
 
+// So, a couple thoughts on how to do this
+// Method A)
+//      copy myself
+//      iterate though all matching connections and randomly replace connection genes (edit weights and enable bit)
+//      since all disjoint and excess genes are taken from the fitter parent, this should be successful in creating functional offspring
+// Method B)
+//      create a new empty genome
+//      iterate through all matching genes and randomly choose a parent to copy from
+//      copy all disjoint and excess genes from self
+//      this should also be functional
 genome *genome::crossover(genome *weakParent) {
     return nullptr;
 }
@@ -78,7 +104,7 @@ genome::~genome() {
 }
 
 void genome::addToFitness(double amt) {
-
+    this->fitness+= amt;
 }
 
 double genome::getFitness() {
