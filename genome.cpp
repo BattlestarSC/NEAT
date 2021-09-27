@@ -70,6 +70,8 @@ genome *genome::clone() {
     return g;
 }
 
+// First, make sure that the assumption of being more fit is valid
+// but rather than do anything that would be challenging, like tossing errors, just print debug and return null
 // So, a couple thoughts on how to do this
 // Method A)
 //      copy myself
@@ -80,7 +82,19 @@ genome *genome::clone() {
 //      iterate through all matching genes and randomly choose a parent to copy from
 //      copy all disjoint and excess genes from self
 //      this should also be functional
+// I'm gonna start off with method A to reduce excess code and I can just use the clone function
 genome *genome::crossover(genome *weakParent) {
+    if(this->fitness < weakParent->fitness) {
+        std::cout << "WARNING: invalid parent matching, someone was dating way out of their league" << std::endl;
+        return nullptr;
+    }
+
+    // copy myself
+    auto* baby = this->clone();
+
+    // alright, so, lets crossover matching shit.
+    // TODO: the method for this is to sort our vectors of connections by innovation number (0...n) then iterate though 
+
     return nullptr;
 }
 
