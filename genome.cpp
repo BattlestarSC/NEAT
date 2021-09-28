@@ -16,7 +16,7 @@ genome::genome(int inSize, int outSize) {
     }
 
     inputSize = inSize;
-    outSize = outputSize;
+    outputSize = outSize;
 
     // first create some nodes
     for(unsigned int i = 0; i < inSize; i++) {
@@ -182,9 +182,19 @@ void genome::mutate_newNode() {
 
 }
 
+// we will mutate ourselves. The parameters are the associated hyperparameters, and this is all done
+// statewise as described in the NEAT paper. See helper functions for details
 void genome::mutate(float weightsProbability, float connectionProbability, float nodeProbability,
                     float activationProbability) {
-
+    if (g_unif(g_re) > (2.0 * weightsProbability)) {
+        this->mutate_weights();
+    }
+    if (g_unif(g_re) > (2.0 * nodeProbability)) {
+        this->mutate_newNode();
+    }
+    if (g_unif(g_re) > (2.0 * connectionProbability)) {
+        this->mutate_connections();
+    }
 }
 
 // Just free all the allocated memory
@@ -207,4 +217,51 @@ void genome::addToFitness(double amt) {
 
 double genome::getFitness() {
     return this->fitness;
+}
+
+// alright, so the neat paper proposed two methods for mutating weights
+/*
+ * Paper quote:
+ * There was an 80% chance of a genome
+having its connection weights mutated, in which case each weight had a 90% chance of
+being uniformly perturbed and a 10% chance of being assigned a new random value.
+ */
+// These could be hyperparemeters (and probably should be) but will be hardcoded for now
+// TODO: make this shit a hyperparameter
+// Method A)
+//      uniformly preturb all weights with the same random [-1.0, 1.0] generator
+//      but we will scale these for sanity (at the cost of some training speed)
+//      so formula is as follows:
+//          pret = g_unif(g_re) * 0.1;
+//      to make a max of 0.1 movement
+// Method B)
+//      randomly assign all weights a new value
+//      for sanity, also use the same random number generator and range [-1.0 , 1.0]
+void genome::mutate_weights() {
+    // First, decide what method to use
+    if (g_unif(g_re) > 0.8) {
+        // Method B, with a range of 2, 0.8 is 10%
+        for (auto c : this->connections) {
+            // random weights
+            c->weight = g_unif(g_re);
+        }
+    } else {
+        // Method A
+        // pick a value to preturb with
+        auto preturbe = g_unif(g_re);
+        for (auto c : this->connections) {
+            // nudge weights
+            c->weight += preturbe;
+        }
+    }
+}
+
+// so we need to create a new connection between two unconnected nodes. Otherwise, quit and do nothing
+// I'm not quite sure what the best method of doing this is
+// Concerns:
+//      1) can't make a cycle
+//      2) can't connect an output node to ANYTHING as an input
+//      3) try to avoid CPU/memory waste
+void genome::mutate_connections() {
+
 }

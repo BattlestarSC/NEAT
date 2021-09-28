@@ -52,7 +52,10 @@ public:
 
 private:
     // just some helper shit
+    // see genome.cpp for useful comments
     void mutate_newNode();
+    void mutate_weights();
+    void mutate_connections();
 };
 
 
