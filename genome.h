@@ -49,6 +49,10 @@ public:
     genome* crossover(genome* weakParent);
     void addToFitness(double amt);
     double getFitness();
+
+private:
+    // just some helper shit
+    void mutate_newNode();
 };
 
 

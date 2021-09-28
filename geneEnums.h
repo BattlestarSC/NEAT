@@ -17,6 +17,8 @@ enum class activationFunction {
     linear,
     step,
     steepSigmoid,
+    // on second thought, this doesn't exactly make sense except for I/O nodes that are in static layers
+    // TODO: add this only for I/O layers
     softmax
 };
 

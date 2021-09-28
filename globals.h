@@ -8,6 +8,7 @@
 // Fucking hell, I can't believe I actually found a use for a global I
 // am not entirely sure if there is a better option to avoid
 extern unsigned long long int g_current_innovation_number = 0;
+extern unsigned int g_current_node = 0;
 // This seems better than doing it a trillion times
 // Yes, putting an include here sucks. deal with it
 #include <random>
