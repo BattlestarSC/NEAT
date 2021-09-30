@@ -6,13 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/CLionProjects/NEAT/NEAT/hyperSingleton.cpp
-hyperSingleton.h
-D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
-chrono
--
-cmath
--
+D:/CLionProjects/NEAT/Google_tests/individialTest.cpp
 
 D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 random
