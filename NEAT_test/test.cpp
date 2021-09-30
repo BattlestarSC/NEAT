@@ -30,6 +30,59 @@ TEST(TestIndividualCreation, TestIndividualNew) {
 		EXPECT_TRUE(c != nullptr);
 	}
 
+	//Make sure weights are assigned randomly
+	for (auto* c : ind->connections) {
+		EXPECT_FALSE(c->weight == 0.0);
+	}
+
+	//Make sure all indexes are valid
+	for (auto* c : ind->connections) {
+		EXPECT_TRUE(c->inputNode < 5);
+	}
+	for (auto* c : ind->connections) {
+		EXPECT_TRUE(c->outputNode == 6 || c->outputNode == 5);
+	}
+
+	//cleanup
+	delete ind;
+
+	//cleanup
+	delete p;
+}
+
+TEST(TestIndividualCreation, TestIndividualCopu) {
+	//This should do nothing but provide randomness
+	auto* p = new hyperSingleton{ 0,0,0,0,0,0,0,0,0,activationFunction::relu };
+
+	//We want to test this creation method
+	auto* ind = new individual{ 5,2,p };
+
+	//And now make our lab-made child
+	auto* cpy = new individual{ ind };
+
+	// set up list iterators
+	auto ind_front = ind->connections.begin();
+	auto cpy_front = cpy->connections.begin();
+
+	// check all connections but the last one
+	while (ind_front != ind->connections.end() && cpy_front != cpy->connections.end()) {
+		struct connection* ic = *ind_front;
+		struct connection* cc = *cpy_front;
+		EXPECT_TRUE(ic->innovationNumber == cc->innovationNumber);
+		EXPECT_TRUE(ic->weight == cc->weight);
+		EXPECT_TRUE(ic->enable == cc->enable);
+		EXPECT_TRUE(ic->inputNode == cc->inputNode);
+		EXPECT_TRUE(ic->outputNode == cc->outputNode);
+		ind_front++;
+		cpy_front++;
+	}
+
+	// make sure the length is the same
+	EXPECT_TRUE(ind_front == ind->connections.end() && cpy_front == cpy->connections.end());
+
+	//cleanup
+	delete cpy;
+
 	//cleanup
 	delete ind;
 

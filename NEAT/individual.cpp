@@ -15,7 +15,7 @@ individual::individual(int inSize, int outSize, hyperSingleton* controlSingleton
         for (int j = 0; j < this->inputSize; j++) {
             auto* con = new struct connection;
             con->inputNode = j;
-            con->outputNode = i;
+            con->outputNode = this->inputSize+i;
             con->weight = this->parameterSingleton->getRandom();
             con->enable = true;
             this->connections.push_back(con);
