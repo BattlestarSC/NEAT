@@ -1,9 +1,4 @@
-//
-// Created by battlestarsc on 9/29/2021.
-//
-
-#ifndef NEAT_INDIVIDUAL_H
-#define NEAT_INDIVIDUAL_H
+#pragma once
 #include <list>
 #include <vector>
 #include "hyperSingleton.h"
@@ -45,7 +40,7 @@ public:
 
     ~individual();
 
-private:
+public: // needs to be public for testing
     double fitness = 0.0;
     int inputSize;
     int outputSize;
@@ -65,6 +60,3 @@ private:
     double linear();
     double oneThreshold();
 };
-
-
-#endif //NEAT_INDIVIDUAL_H

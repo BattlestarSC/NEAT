@@ -1,10 +1,4 @@
-//
-// Created by battlestarsc on 9/29/2021.
-//
-
-#ifndef NEAT_HYPERSINGLETON_H
-#define NEAT_HYPERSINGLETON_H
-
+#pragma once
 #include <random>
 
 // random setup from https://stackoverflow.com/questions/7114043/random-number-generation-in-c11-how-to-generate-how-does-it-work
@@ -36,7 +30,7 @@ public:
     const float nodesCoefficient;
     const activationFunction function;
 
-    hyperSingleton(float a, float b, float c, float d, int e, double f, float g, float h, float i, activationFunction j = activationFunction::steepSigmoid): mutateWeights(a), mutateConnections(b), mutateNodes(c), enableConnection(d), populationSize(e), speciesThreshold(f), weightsCoefficient(g), connectionsCoefficient(h), nodesCoefficient(i), function(j){};
+    hyperSingleton(float a, float b, float c, float d, int e, double f, float g, float h, float i, activationFunction j = activationFunction::steepSigmoid) : mutateWeights(a), mutateConnections(b), mutateNodes(c), enableConnection(d), populationSize(e), speciesThreshold(f), weightsCoefficient(g), connectionsCoefficient(h), nodesCoefficient(i), function(j) {};
 
 public:
     // Get the new element's number and then increment the counters
@@ -52,10 +46,7 @@ private:
     unsigned long long int nodeNumbers = 0;
     uint32_t seed_val = 0;
     MyRNG rng;
-    std::normal_distribution<double> normal_dist{0, 1};
+    std::normal_distribution<double> normal_dist{ 0, 1 };
 
 
 };
-
-
-#endif //NEAT_HYPERSINGLETON_H

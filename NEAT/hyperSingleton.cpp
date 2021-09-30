@@ -1,7 +1,4 @@
-//
-// Created by battlestarsc on 9/29/2021.
-//
-
+#include "pch.h"
 #include "hyperSingleton.h"
 #include <chrono>
 #include <cmath>
