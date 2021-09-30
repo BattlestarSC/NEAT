@@ -50,6 +50,9 @@ private:
     // make life easy during feeding, this is the activation function
     double activate();
 
+    // sorting that needs object access
+    bool connectionSortFeed(struct connection* a, struct connection* b);
+
     // activation functions
     double sigmoid();
     double steepSigmoid();

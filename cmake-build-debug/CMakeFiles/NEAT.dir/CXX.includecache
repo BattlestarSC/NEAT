@@ -6,45 +6,25 @@
 
 #IncludeRegexTransform: 
 
-D:/CLionProjects/NEAT/conGene.cpp
-conGene.h
-D:/CLionProjects/NEAT/conGene.h
+D:/CLionProjects/NEAT/NEAT/hyperSingleton.cpp
+hyperSingleton.h
+D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 
-D:/CLionProjects/NEAT/conGene.h
+D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 
-D:/CLionProjects/NEAT/geneEnums.h
-
-D:/CLionProjects/NEAT/genome.cpp
+D:/CLionProjects/NEAT/NEAT/individual.cpp
+individual.h
+D:/CLionProjects/NEAT/NEAT/individual.h
+hyperSingleton.h
+D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 iostream
 -
-genome.h
-D:/CLionProjects/NEAT/genome.h
-globals.h
-D:/CLionProjects/NEAT/globals.h
-nodeGene.h
-D:/CLionProjects/NEAT/nodeGene.h
-
-D:/CLionProjects/NEAT/genome.h
-conGene.h
-D:/CLionProjects/NEAT/conGene.h
-nodeGene.h
-D:/CLionProjects/NEAT/nodeGene.h
-vector
--
-
-D:/CLionProjects/NEAT/globals.h
-random
--
-
-D:/CLionProjects/NEAT/nodeGene.cpp
-nodeGene.h
-D:/CLionProjects/NEAT/nodeGene.h
 cmath
 -
-algorithm
--
 
-D:/CLionProjects/NEAT/nodeGene.h
-geneEnums.h
-D:/CLionProjects/NEAT/geneEnums.h
+D:/CLionProjects/NEAT/NEAT/individual.h
+vector
+-
+hyperSingleton.h
+D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 

@@ -8,11 +8,56 @@
 #include <cmath>
 
 /*
- * So for sorting connections, we want to sort by input node for feeding forward
+ * So for sorting connections, we want to sort into an order than can be directly fed
+ * The further along in the graph node is the one that depends on fewer input nodes
+ *
+ * std::sort expects this to be true if a is smaller
+ *
+ * So sort this way:
+ * 1) if the connection has an input within the input range, it is smaller
+ *      to prevent a non-deterministic sorting order, if both input from input nodes, the smaller node number is smaller
+ * 2) if one connection has an output within the output range, it is larger
+ *      to prevent a non-deterministic sorting order, if bothy output to output nodes, the smaller node number is smaller
+ * 3) if one connection outputs to the other's input, it is smaller
+ * 4) um, really not sure here
  */
-bool connectionSortFeed(struct connection* a, struct connection* b) {
-    // true if a is smaller
-    return (a->inputNode <= b->inputNode);
+bool individual::connectionSortFeed(struct connection* a, struct connection* b) {
+    // Step 1
+    bool aInput = (a->inputNode < this->inputSize);
+    bool bInput = (b->inputNode < this->inputSize);
+    if (aInput && bInput) {
+        return (a->inputNode <= b->inputNode);
+    }
+    if (aInput) {
+        return true;
+    }
+    if (bInput) {
+        return false;
+    }
+
+    // Step 2
+    bool aOutput = a->outputNode >= this->inputSize && a->outputNode < (this->inputSize + this->outputSize);
+    bool bOutput = b->outputNode >= this->inputSize && b->outputNode < (this->inputSize + this->outputSize);
+    if (aOutput && bOutput) {
+        return (a->outputNode <= b->outputNode);
+    }
+    if (aOutput) {
+        return true;
+    }
+    if (bOutput) {
+        return false;
+    }
+
+    //step 3
+    if (a->outputNode == b->inputNode) {
+        return true;
+    }
+    if (b->outputNode == a->inputNode) {
+        return false;
+    }
+
+    //TODO: Figure this sort out
+    return true; // placeholder
 }
 
 /*
