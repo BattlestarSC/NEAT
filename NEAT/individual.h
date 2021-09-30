@@ -4,6 +4,7 @@
 
 #ifndef NEAT_INDIVIDUAL_H
 #define NEAT_INDIVIDUAL_H
+#include <list>
 #include <vector>
 #include "hyperSingleton.h"
 
@@ -28,30 +29,34 @@ struct connection {
 class individual {
 public:
     //create a new individual randomly
-    individual(int inputSize, int outputSize, hyperSingleton* controlSingleton);
+    individual(int inSize, int outSize, hyperSingleton* controlSingleton);
     // for asexual reproduction (clone or mutate only)
-    individual(individual* cloneParent, bool mutate = false);
+    explicit individual(individual* cloneParent, bool mutate = false);
     // for sexual reproduction (makes itself based on its provided parents, does not film ;))
     individual(individual* parentA, individual* parentB);
     // feed forward the net
+    std::list<double> feed(std::list<double> input);
+    // we can take either
     std::vector<double> feed(std::vector<double> input);
     // depending upon type of learning, this will work for both reinforcement and standard learning
     void addFitness(double fit);
     // accessor method to keep shit private
     double getFitness();
 
+    ~individual();
+
 private:
     double fitness = 0.0;
     int inputSize;
     int outputSize;
+    std::list<struct connection*> connections;
     hyperSingleton* parameterSingleton = nullptr;
+
+
     void crossover(individual* parentA, individual* parentB);
     void mutate();
     // make life easy during feeding, this is the activation function
     double activate();
-
-    // sorting that needs object access
-    bool connectionSortFeed(struct connection* a, struct connection* b);
 
     // activation functions
     double sigmoid();

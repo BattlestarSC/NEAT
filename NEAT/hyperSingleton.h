@@ -4,9 +4,15 @@
 
 #ifndef NEAT_HYPERSINGLETON_H
 #define NEAT_HYPERSINGLETON_H
+
+#include <random>
+
+// random setup from https://stackoverflow.com/questions/7114043/random-number-generation-in-c11-how-to-generate-how-does-it-work
+typedef std::mt19937 MyRNG;
+
 /*
  * This is just a singleton to hold hyperparameters
- * It also holds global innovation numbers and node numbers
+ * It also holds global innovation numbers and node numbers and a random number engine
  */
 
 enum class activationFunction {
@@ -37,9 +43,18 @@ public:
     unsigned long long int getInnovationNumber();
     unsigned long long int getNodeNumber();
 
+    double getRandomRange(double a);
+    double getRandom();
+
+
 private:
     unsigned long long int innovationNumber = 0;
     unsigned long long int nodeNumbers = 0;
+    uint32_t seed_val = 0;
+    MyRNG rng;
+    std::normal_distribution<double> normal_dist{0, 1};
+
+
 };
 
 

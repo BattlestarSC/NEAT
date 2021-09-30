@@ -9,8 +9,14 @@
 D:/CLionProjects/NEAT/NEAT/hyperSingleton.cpp
 hyperSingleton.h
 D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
+chrono
+-
+cmath
+-
 
 D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
+random
+-
 
 D:/CLionProjects/NEAT/NEAT/individual.cpp
 individual.h
@@ -19,10 +25,14 @@ hyperSingleton.h
 D:/CLionProjects/NEAT/NEAT/hyperSingleton.h
 iostream
 -
+random
+-
 cmath
 -
 
 D:/CLionProjects/NEAT/NEAT/individual.h
+list
+-
 vector
 -
 hyperSingleton.h

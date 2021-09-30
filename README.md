@@ -36,6 +36,9 @@ Nodes will only be created with a new unique number, like the innovation numbers
 
 Since all disjoint and excess genes are copied from the more fit parent, and new nodes are formed by breaking a current connection, it is unlikely that useless and non-functional structures will be copied, but this edge case is addressed in the feed forward function.
 
+**All connections must maintain their order to avoid useless sorting and graph cycles**. The idea here is that if the list maintains connection orders, and if everytime a new connections made it is placed in a reasonable location in the list, and if everytime a node is created, the connections retain their order, then we can just run through the connections in order and have a functioning execution graph. 
+Edge cases that break this *may* be possible, but I can't think of a single example. 
+
 **Hyperparameters**
 
 see: hyperSingleton.h
