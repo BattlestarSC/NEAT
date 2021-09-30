@@ -74,80 +74,59 @@ CMakeFiles\NEAT.dir\main.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\main.cpp.s /c D:\CLionProjects\NEAT\main.cpp
 <<
 
-CMakeFiles\NEAT.dir\conGene.cpp.obj: CMakeFiles\NEAT.dir\flags.make
-CMakeFiles\NEAT.dir\conGene.cpp.obj: ..\conGene.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/NEAT.dir/conGene.cpp.obj"
+CMakeFiles\NEAT.dir\NEAT\individual.cpp.obj: CMakeFiles\NEAT.dir\flags.make
+CMakeFiles\NEAT.dir\NEAT\individual.cpp.obj: ..\NEAT\individual.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/NEAT.dir/NEAT/individual.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\NEAT.dir\conGene.cpp.obj /FdCMakeFiles\NEAT.dir\ /FS -c D:\CLionProjects\NEAT\conGene.cpp
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\NEAT.dir\NEAT\individual.cpp.obj /FdCMakeFiles\NEAT.dir\ /FS -c D:\CLionProjects\NEAT\NEAT\individual.cpp
 <<
 
-CMakeFiles\NEAT.dir\conGene.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NEAT.dir/conGene.cpp.i"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\NEAT.dir\conGene.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\NEAT\conGene.cpp
+CMakeFiles\NEAT.dir\NEAT\individual.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NEAT.dir/NEAT/individual.cpp.i"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\NEAT.dir\NEAT\individual.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\NEAT\NEAT\individual.cpp
 <<
 
-CMakeFiles\NEAT.dir\conGene.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NEAT.dir/conGene.cpp.s"
+CMakeFiles\NEAT.dir\NEAT\individual.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NEAT.dir/NEAT/individual.cpp.s"
 	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\conGene.cpp.s /c D:\CLionProjects\NEAT\conGene.cpp
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\NEAT\individual.cpp.s /c D:\CLionProjects\NEAT\NEAT\individual.cpp
 <<
 
-CMakeFiles\NEAT.dir\nodeGene.cpp.obj: CMakeFiles\NEAT.dir\flags.make
-CMakeFiles\NEAT.dir\nodeGene.cpp.obj: ..\nodeGene.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/NEAT.dir/nodeGene.cpp.obj"
+CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj: CMakeFiles\NEAT.dir\flags.make
+CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj: ..\NEAT\hyperSingleton.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/NEAT.dir/NEAT/hyperSingleton.cpp.obj"
 	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\NEAT.dir\nodeGene.cpp.obj /FdCMakeFiles\NEAT.dir\ /FS -c D:\CLionProjects\NEAT\nodeGene.cpp
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj /FdCMakeFiles\NEAT.dir\ /FS -c D:\CLionProjects\NEAT\NEAT\hyperSingleton.cpp
 <<
 
-CMakeFiles\NEAT.dir\nodeGene.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NEAT.dir/nodeGene.cpp.i"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\NEAT.dir\nodeGene.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\NEAT\nodeGene.cpp
+CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NEAT.dir/NEAT/hyperSingleton.cpp.i"
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\NEAT\NEAT\hyperSingleton.cpp
 <<
 
-CMakeFiles\NEAT.dir\nodeGene.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NEAT.dir/nodeGene.cpp.s"
+CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NEAT.dir/NEAT/hyperSingleton.cpp.s"
 	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\nodeGene.cpp.s /c D:\CLionProjects\NEAT\nodeGene.cpp
-<<
-
-CMakeFiles\NEAT.dir\genome.cpp.obj: CMakeFiles\NEAT.dir\flags.make
-CMakeFiles\NEAT.dir\genome.cpp.obj: ..\genome.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/NEAT.dir/genome.cpp.obj"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\NEAT.dir\genome.cpp.obj /FdCMakeFiles\NEAT.dir\ /FS -c D:\CLionProjects\NEAT\genome.cpp
-<<
-
-CMakeFiles\NEAT.dir\genome.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NEAT.dir/genome.cpp.i"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe > CMakeFiles\NEAT.dir\genome.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\NEAT\genome.cpp
-<<
-
-CMakeFiles\NEAT.dir\genome.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NEAT.dir/genome.cpp.s"
-	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\genome.cpp.s /c D:\CLionProjects\NEAT\genome.cpp
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.s /c D:\CLionProjects\NEAT\NEAT\hyperSingleton.cpp
 <<
 
 # Object files for target NEAT
 NEAT_OBJECTS = \
 "CMakeFiles\NEAT.dir\main.cpp.obj" \
-"CMakeFiles\NEAT.dir\conGene.cpp.obj" \
-"CMakeFiles\NEAT.dir\nodeGene.cpp.obj" \
-"CMakeFiles\NEAT.dir\genome.cpp.obj"
+"CMakeFiles\NEAT.dir\NEAT\individual.cpp.obj" \
+"CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj"
 
 # External object files for target NEAT
 NEAT_EXTERNAL_OBJECTS =
 
 NEAT.exe: CMakeFiles\NEAT.dir\main.cpp.obj
-NEAT.exe: CMakeFiles\NEAT.dir\conGene.cpp.obj
-NEAT.exe: CMakeFiles\NEAT.dir\nodeGene.cpp.obj
-NEAT.exe: CMakeFiles\NEAT.dir\genome.cpp.obj
+NEAT.exe: CMakeFiles\NEAT.dir\NEAT\individual.cpp.obj
+NEAT.exe: CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj
 NEAT.exe: CMakeFiles\NEAT.dir\build.make
 NEAT.exe: CMakeFiles\NEAT.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable NEAT.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable NEAT.exe"
 	"C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\NEAT.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\mt.exe --manifests -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\NEAT.dir\objects1.rsp @<<
  /out:NEAT.exe /implib:NEAT.lib /pdb:D:\CLionProjects\NEAT\cmake-build-debug\NEAT.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<

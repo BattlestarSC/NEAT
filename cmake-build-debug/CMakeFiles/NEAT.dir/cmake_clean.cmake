@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/NEAT.dir/conGene.cpp.obj"
-  "CMakeFiles/NEAT.dir/genome.cpp.obj"
+  "CMakeFiles/NEAT.dir/NEAT/hyperSingleton.cpp.obj"
+  "CMakeFiles/NEAT.dir/NEAT/individual.cpp.obj"
   "CMakeFiles/NEAT.dir/main.cpp.obj"
-  "CMakeFiles/NEAT.dir/nodeGene.cpp.obj"
   "NEAT.exe"
   "NEAT.exe.manifest"
   "NEAT.lib"

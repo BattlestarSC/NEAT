@@ -1,0 +1,13 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: D:/CLionProjects/NEAT/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_1c7b8\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_1c7b8.dir\build.make /nologo -L                  CMakeFiles\cmTC_1c7b8.dir\build
+Building C object CMakeFiles/cmTC_1c7b8.dir/CheckIncludeFile.c.obj
+	"C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_1c7b8.dir\CheckIncludeFile.c.obj.d --working-dir=D:\CLionProjects\NEAT\cmake-build-debug\CMakeFiles\CMakeTmp --filter-prefix="" -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1428~1.299\bin\Hostx86\x86\cl.exe @C:\Users\18438\AppData\Local\Temp\nmB930.tmp
+NMAKE : fatal error U1077: '"C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe"' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\HostX86\x86\nmake.exe"' : return code '0x2'
+Stop.
+
+
+

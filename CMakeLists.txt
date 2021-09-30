@@ -3,4 +3,6 @@ project(NEAT)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(NEAT main.cpp conGene.cpp conGene.h nodeGene.cpp nodeGene.h geneEnums.h genome.cpp genome.h globals.h)
+add_executable(NEAT main.cpp NEAT/individual.cpp NEAT/individual.h NEAT/hyperSingleton.cpp NEAT/hyperSingleton.h)
+
+add_subdirectory(Google_tests)

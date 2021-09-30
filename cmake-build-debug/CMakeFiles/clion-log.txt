@@ -1,4 +1,8 @@
 "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - NMake Makefiles" D:\CLionProjects\NEAT
+-- Found Python: C:/Program Files/Python39/python.exe (found version "3.9.2") found components: Interpreter 
+-- Looking for pthread.h
+-- Looking for pthread.h - not found
+-- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
 -- Build files have been written to: D:/CLionProjects/NEAT/cmake-build-debug

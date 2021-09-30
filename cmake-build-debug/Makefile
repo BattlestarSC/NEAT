@@ -54,6 +54,30 @@ CMAKE_BINARY_DIR = D:\CLionProjects\NEAT\cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install\local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install\local
+
+# Special rule for the target install/local
+install\local\fast: preinstall\fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install\local\fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install\fast: preinstall\fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+.PHONY : install\fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -73,6 +97,15 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache\fast: rebuild_cache
 .PHONY : rebuild_cache\fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components\fast: list_install_components
+.PHONY : list_install_components\fast
 
 # The main all target
 all: cmake_check_build_system
@@ -118,53 +151,105 @@ NEAT\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\build
 .PHONY : NEAT\fast
 
-conGene.obj: conGene.cpp.obj
-.PHONY : conGene.obj
+#=============================================================================
+# Target rules for targets named gmock_main
+
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gmock_main
+.PHONY : gmock_main
+
+# fast build rule for target.
+gmock_main\fast:
+	$(MAKE) $(MAKESILENT) -f Google_tests\lib\googlemock\CMakeFiles\gmock_main.dir\build.make /nologo -$(MAKEFLAGS) Google_tests\lib\googlemock\CMakeFiles\gmock_main.dir\build
+.PHONY : gmock_main\fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock\fast:
+	$(MAKE) $(MAKESILENT) -f Google_tests\lib\googlemock\CMakeFiles\gmock.dir\build.make /nologo -$(MAKEFLAGS) Google_tests\lib\googlemock\CMakeFiles\gmock.dir\build
+.PHONY : gmock\fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest\fast:
+	$(MAKE) $(MAKESILENT) -f Google_tests\lib\googletest\CMakeFiles\gtest.dir\build.make /nologo -$(MAKEFLAGS) Google_tests\lib\googletest\CMakeFiles\gtest.dir\build
+.PHONY : gtest\fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main\fast:
+	$(MAKE) $(MAKESILENT) -f Google_tests\lib\googletest\CMakeFiles\gtest_main.dir\build.make /nologo -$(MAKEFLAGS) Google_tests\lib\googletest\CMakeFiles\gtest_main.dir\build
+.PHONY : gtest_main\fast
+
+NEAT\hyperSingleton.obj: NEAT\hyperSingleton.cpp.obj
+.PHONY : NEAT\hyperSingleton.obj
 
 # target to build an object file
-conGene.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\conGene.cpp.obj
-.PHONY : conGene.cpp.obj
+NEAT\hyperSingleton.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.obj
+.PHONY : NEAT\hyperSingleton.cpp.obj
 
-conGene.i: conGene.cpp.i
-.PHONY : conGene.i
+NEAT\hyperSingleton.i: NEAT\hyperSingleton.cpp.i
+.PHONY : NEAT\hyperSingleton.i
 
 # target to preprocess a source file
-conGene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\conGene.cpp.i
-.PHONY : conGene.cpp.i
+NEAT\hyperSingleton.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.i
+.PHONY : NEAT\hyperSingleton.cpp.i
 
-conGene.s: conGene.cpp.s
-.PHONY : conGene.s
+NEAT\hyperSingleton.s: NEAT\hyperSingleton.cpp.s
+.PHONY : NEAT\hyperSingleton.s
 
 # target to generate assembly for a file
-conGene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\conGene.cpp.s
-.PHONY : conGene.cpp.s
+NEAT\hyperSingleton.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\hyperSingleton.cpp.s
+.PHONY : NEAT\hyperSingleton.cpp.s
 
-genome.obj: genome.cpp.obj
-.PHONY : genome.obj
+NEAT\individual.obj: NEAT\individual.cpp.obj
+.PHONY : NEAT\individual.obj
 
 # target to build an object file
-genome.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\genome.cpp.obj
-.PHONY : genome.cpp.obj
+NEAT\individual.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\individual.cpp.obj
+.PHONY : NEAT\individual.cpp.obj
 
-genome.i: genome.cpp.i
-.PHONY : genome.i
+NEAT\individual.i: NEAT\individual.cpp.i
+.PHONY : NEAT\individual.i
 
 # target to preprocess a source file
-genome.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\genome.cpp.i
-.PHONY : genome.cpp.i
+NEAT\individual.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\individual.cpp.i
+.PHONY : NEAT\individual.cpp.i
 
-genome.s: genome.cpp.s
-.PHONY : genome.s
+NEAT\individual.s: NEAT\individual.cpp.s
+.PHONY : NEAT\individual.s
 
 # target to generate assembly for a file
-genome.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\genome.cpp.s
-.PHONY : genome.cpp.s
+NEAT\individual.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\NEAT\individual.cpp.s
+.PHONY : NEAT\individual.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -190,30 +275,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\main.cpp.s
 .PHONY : main.cpp.s
 
-nodeGene.obj: nodeGene.cpp.obj
-.PHONY : nodeGene.obj
-
-# target to build an object file
-nodeGene.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\nodeGene.cpp.obj
-.PHONY : nodeGene.cpp.obj
-
-nodeGene.i: nodeGene.cpp.i
-.PHONY : nodeGene.i
-
-# target to preprocess a source file
-nodeGene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\nodeGene.cpp.i
-.PHONY : nodeGene.cpp.i
-
-nodeGene.s: nodeGene.cpp.s
-.PHONY : nodeGene.s
-
-# target to generate assembly for a file
-nodeGene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\NEAT.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\NEAT.dir\nodeGene.cpp.s
-.PHONY : nodeGene.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -221,20 +282,24 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
+	@echo ... install
+	@echo ... install/local
+	@echo ... list_install_components
 	@echo ... rebuild_cache
 	@echo ... NEAT
-	@echo ... conGene.obj
-	@echo ... conGene.i
-	@echo ... conGene.s
-	@echo ... genome.obj
-	@echo ... genome.i
-	@echo ... genome.s
+	@echo ... gmock
+	@echo ... gmock_main
+	@echo ... gtest
+	@echo ... gtest_main
+	@echo ... NEAT/hyperSingleton.obj
+	@echo ... NEAT/hyperSingleton.i
+	@echo ... NEAT/hyperSingleton.s
+	@echo ... NEAT/individual.obj
+	@echo ... NEAT/individual.i
+	@echo ... NEAT/individual.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... nodeGene.obj
-	@echo ... nodeGene.i
-	@echo ... nodeGene.s
 .PHONY : help
 
 
