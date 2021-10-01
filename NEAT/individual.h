@@ -28,7 +28,7 @@ public:
     // for asexual reproduction (clone or mutate only)
     explicit individual(individual* cloneParent, bool mutate = false);
     // for sexual reproduction (makes itself based on its provided parents, does not film ;))
-    individual(individual* parentA, individual* parentB);
+    individual(individual* parentA, individual* parentB, bool mutate = false);
     // feed forward the net
     std::list<double> feed(std::list<double> input);
     // we can take either
@@ -52,6 +52,8 @@ public: // needs to be public for testing
     void mutate();
     // make life easy during feeding, this is the activation function
     double activate();
+    // make life easy, THIS IS ONLY FOR CREATING A NEW CONNECTION VIA MUTATION
+    struct connection* mutateConnection(unsigned long long int inNode = 0, unsigned long long int outNode = 0, double weight = 0.0);
 
     // activation functions
     double sigmoid();
