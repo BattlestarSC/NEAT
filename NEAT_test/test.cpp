@@ -89,3 +89,67 @@ TEST(TestIndividualCreation, TestIndividualCopu) {
 	//cleanup
 	delete p;
 }
+
+TEST(mutateConnectionFunctional, mutateConnection) {
+	// Setup
+	//This should do nothing but provide randomness
+	auto* p = new hyperSingleton{ 0,0,0,0,0,0,0,0,0,activationFunction::relu };
+
+	//We want to test this creation method
+	auto* ind = new individual{ 5,2,p };
+	auto innoNumber = p->innovationNumber;
+
+	// run. Since it is fully connected, we EXPECT a failure
+	EXPECT_TRUE(ind->mutateConnection(0,0) == nullptr);
+	// make sure nothing is fucked
+	EXPECT_EQ(innoNumber, p->innovationNumber);
+	EXPECT_EQ(ind->connections.size(), 10);
+
+	// Add a new node, code stolen from mutate function
+	// pick a connection to break
+	auto it = ind->connections.begin();
+	std::advance(it, rand() % ind->connections.size());
+	auto* con = (*it);
+
+	// make the two new connections
+	auto newNodeID = ind->parameterSingleton->getNodeNumber();
+	auto* newA = ind->mutateConnection(con->inputNode, newNodeID, true, 1.0);
+	auto* newB = ind->mutateConnection(newNodeID, con->outputNode, true, con->weight);
+
+	// Test results
+	// First, both should work, so expect two non-nullptr results
+	EXPECT_TRUE(newA != nullptr);
+	EXPECT_TRUE(newB != nullptr);
+
+	// make sure that they have been added to the list
+	EXPECT_EQ(ind->connections.size(), 12);
+	bool foundA{false}, foundB{ false };
+	for (auto* c : ind->connections) {
+		if (c == newA) {
+			foundA = true;
+		}
+		if (c == newB) {
+			foundB = true;
+		}
+	}
+	EXPECT_TRUE(foundA);
+	EXPECT_TRUE(foundB);
+	// make sure they have valid weights and innovation numbers
+	EXPECT_EQ(innoNumber + 2, p->innovationNumber);
+	EXPECT_TRUE(newA->innovationNumber >= innoNumber && newA->innovationNumber < p->innovationNumber);
+	EXPECT_TRUE(newB->innovationNumber >= innoNumber && newB->innovationNumber < p->innovationNumber);
+	EXPECT_FALSE(newA->innovationNumber == newB->innovationNumber);
+	// chances of this are 0 if made correctly
+	EXPECT_FALSE(newA->weight == newB->weight);
+	
+	// Now add a new connection to any location
+	auto* newC = ind->mutateConnection(0, 0);
+
+	// We expect a not nullptr result. Since everything else has been checked, we only need check this
+	EXPECT_FALSE(newC == nullptr);
+
+	// cleanup
+	delete p;
+	delete ind;
+ 
+}

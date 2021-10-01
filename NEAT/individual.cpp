@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <tuple>
+#include <iterator>
 
 // Population start constructor
 individual::individual(int inSize, int outSize, hyperSingleton* controlSingleton) {
@@ -180,7 +181,48 @@ void individual::crossover(individual* parentA, individual* parentB) {
 * 3) new node
  */
 void individual::mutate() {
+    // Starting with the easiest, weight mutation
+    // probability of mutation
+    if (this->parameterSingleton->getRandomRange(0.5) + 0.5 < this->parameterSingleton->mutateWeights) {
 
+        // method 1
+        // uniform nudge, high chance (84% for the normal curve, slightly lower than the NEAT paper)
+        if (this->parameterSingleton->getRandom() < 1.0) {
+            double pret{this->parameterSingleton->getRandomRange(0.25)};
+            for (auto* c : this->connections) {
+                c->weight += pret;
+            }
+        }
+        else {
+            // method 2
+            // random weights reassignment
+            for (auto* c : this->connections) {
+                c->weight = this->parameterSingleton->getRandom();
+            }
+        }
+
+    }
+
+
+    // mutate a new connection
+    if (this->parameterSingleton->getRandomRange(1.0) < 2 * this->parameterSingleton->mutateConnections) {
+        this->mutateConnection(0, 0);
+    }
+
+    // mutate a new node
+    if (this->parameterSingleton->getRandomRange(1.0) < 2 * this->parameterSingleton->mutateNodes) {
+        // pick a connection to break
+        auto it = this->connections.begin();
+        std::advance(it, rand() % this->connections.size());
+        auto* con = (*it);
+
+        // make the two new connections
+        // TODO: HANDLE THE INNOVATION NUMBER NON-REPETITION
+        auto newNodeID = this->parameterSingleton->getNodeNumber();
+        this->mutateConnection(con->inputNode, newNodeID, true, 1.0);
+        this->mutateConnection(newNodeID, con->outputNode, true, con->weight);
+
+    }
 }
 
 // standard sigmoid function
@@ -249,7 +291,7 @@ double individual::activate(double in) {
 * 
 * Since we need a way to make sure innovation numbers for similar structures are not duplicated, we return the new connection for shit to be figured out elsewhere
 */
-connection* individual::mutateConnection(unsigned long long int inNode, unsigned long long int outNode, double weight)
+connection* individual::mutateConnection(unsigned long long int inNode, unsigned long long int outNode, bool sWeight, double weight)
 {
     unsigned long long int iNode = inNode, oNode = outNode;
     // make the new connection structure
@@ -309,7 +351,7 @@ connection* individual::mutateConnection(unsigned long long int inNode, unsigned
 
     // build the new connection
     con->enable = true;
-    con->weight = (weight == 0) ? this->parameterSingleton->getNodeNumber() : weight;
+    con->weight = (!sWeight) ? this->parameterSingleton->getRandom() : weight;
     con->inputNode = iNode; 
     con->outputNode = oNode;
     con->innovationNumber = this->parameterSingleton->getInnovationNumber();

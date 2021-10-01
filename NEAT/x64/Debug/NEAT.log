@@ -1,16 +1,1 @@
-﻿  pch.cpp
-  hyperSingleton.cpp
-D:\VisualStudioProjects\NEAT\NEAT\hyperSingleton.cpp(21,138): warning C4244: '=': conversion from '_Rep' to 'uint32_t', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-D:\VisualStudioProjects\NEAT\NEAT\hyperSingleton.cpp(35,138): warning C4244: '=': conversion from '_Rep' to 'uint32_t', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-  individual.cpp
-  NEAT.cpp
-  Generating Code...
-  NEAT.vcxproj -> D:\VisualStudioProjects\NEAT\NEAT\x64\Debug\NEAT.lib
+﻿
