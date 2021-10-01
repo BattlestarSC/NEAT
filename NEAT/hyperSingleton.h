@@ -41,7 +41,7 @@ public:
     double getRandom();
 
 
-private:
+public:
     unsigned long long int innovationNumber = 0;
     unsigned long long int nodeNumbers = 0;
     uint32_t seed_val = 0;

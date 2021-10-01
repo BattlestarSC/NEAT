@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <cmath>
+#include <tuple>
 
 // Population start constructor
 individual::individual(int inSize, int outSize, hyperSingleton* controlSingleton) {
@@ -21,6 +22,20 @@ individual::individual(int inSize, int outSize, hyperSingleton* controlSingleton
             con->enable = true;
             this->connections.push_back(con);
         }
+    }
+    // handle innovation numbers
+    auto it = this->connections.begin();
+    for (unsigned long long int i = 0; i < this->connections.size(); i++) {
+        (*it)->innovationNumber = i;
+        std::advance(it, 1);
+    }
+
+    // handle globals
+    if (this->parameterSingleton->innovationNumber == 0) {
+        this->parameterSingleton->innovationNumber = inSize * outSize;
+    }
+    if (this->parameterSingleton->nodeNumbers == 0) {
+        this->parameterSingleton->nodeNumbers = inSize + outSize;
     }
 }
 
@@ -169,16 +184,16 @@ void individual::mutate() {
 }
 
 // standard sigmoid function
-double individual::sigmoid() {
-    double d = std::exp(-this->fitness);
+double individual::sigmoid(double i) {
+    double d = std::exp(i);
     d += 1.0;
     d = 1.0 / d;
     return d;
 }
 
 // steepened sigmoid referenced in NEAT paper
-double individual::steepSigmoid() {
-    double d = -4.9 * this->fitness;
+double individual::steepSigmoid(double i) {
+    double d = -4.9 * i;
     d = std::exp(d);
     d += 1.0;
     d = 1.0 / d;
@@ -186,40 +201,40 @@ double individual::steepSigmoid() {
 }
 
 // relu activation function
-double individual::relu() {
-    return (this->fitness > 0.0) ? this->fitness : 0.0;
+double individual::relu(double i) {
+    return (i > 0.0) ? i : 0.0;
 }
 
-double individual::linear() {
-    return this->fitness;
+double individual::linear(double i) {
+    return i;
 }
 
-double individual::oneThreshold() {
-    return (this->fitness > 1.0) ? 1.0 : 0.0;
+double individual::oneThreshold(double i) {
+    return (i > 1.0) ? 1.0 : 0.0;
 }
 
-double individual::activate() {
+double individual::activate(double in) {
     // fallback case
     if (this->parameterSingleton == nullptr) {
-        return steepSigmoid();
+        return steepSigmoid(in);
     }
     // actually run activation
     // breaks are not used since EVERY case returns
     switch (this->parameterSingleton->function) {
     case activationFunction::sigmoid:
-        return this->sigmoid();
+        return this->sigmoid(in);
     case activationFunction::steepSigmoid:
-        return this->steepSigmoid();
+        return this->steepSigmoid(in);
     case activationFunction::relu:
-        return this->relu();
+        return this->relu(in);
     case activationFunction::linear:
-        return this->linear();
+        return this->linear(in);
     case activationFunction::oneThreshold:
-        return this->oneThreshold();
+        return this->oneThreshold(in);
     default:
         // THIS STATE IS UNREACHABLE. IF IT IS REACHED, THE CODE IS IMPOSSIBLY FUCKED. GIVE UP, CRY, AND SEEK PROFESSIONAL HELP. DO NOT ATTEMPT TO FIX
         std::cout << "Reached impossible state in individual::activate(), defaulting to steep sigmoid activation function" << std::endl;
-        return steepSigmoid();
+        return steepSigmoid(in);
     }
 }
 
@@ -331,8 +346,92 @@ connection* individual::mutateConnection(unsigned long long int inNode, unsigned
     return con;
 }
 
+/*
+* So we will linearly scan each connection gene
+* With the exception of the input nodes, the input of each gene is the sum of weights times activation function outputs
+* We will simply trust the above setup to not let things get out of order
+* We will keep a running vector of tuples in the following layout
+* tuple<unsigned long long int, double> for tuple<node, value>
+* When used as an input, if the node value is not in the input range, we use weight*activate(std::get<1>(correct tuple))
+*/
 std::vector<double> individual::feed(std::vector<double> input) {
-    return std::vector<double>();
+    std::vector<std::tuple<unsigned long long int, double>> runtime{};
+
+    // First add all inputs
+    for (unsigned long long int i = 0; i < this->inputSize; i++) {
+
+        // check for failure
+        if (input.size() >= i) {
+            std::cout << "WARNING: Feeding inputs failed, inputs too short" << std::endl;
+        }
+
+        runtime.push_back(std::tuple<unsigned long long int, double>(i, input[i])); // damn is this verbose
+
+    }
+
+    // now run though all connections
+    for (auto* c : this->connections) {
+
+        // first get input connection
+        double input{0.0};
+        for (auto i : runtime) {
+            if (std::get<0>(i) == c->inputNode) {
+                // check if sensor node
+                if (std::get<0>(i) < this->inputSize) {
+                    input = std::get<1>(i);
+                }
+                else {
+                    input = activate(std::get<1>(i));
+                }
+                // should only be one entry
+                break;
+            }
+        }
+
+        // now see if there is a current entry for the output node
+        std::tuple<unsigned long long int, double>* outNode = nullptr;
+        for (auto i : runtime) {
+            if (std::get<0>(i) == c->outputNode) {
+                outNode = &i;
+                break;
+            }
+        }
+
+        // apply weight
+        input *= c->weight;
+
+        // output
+        if (outNode == nullptr) {
+            runtime.push_back(std::tuple<unsigned long long int, double>{c->outputNode, input});
+        }
+        else {
+            std::get<1>(*outNode) += input; // update the value
+        }
+
+    }
+
+    // prepare output vector
+    // question, if not created with new and returned as a pointer, will this go out of scope?
+    std::vector<double> output{};
+    std::vector<std::tuple<unsigned long long int, double>*> outputPrep{};
+
+    for (auto i : runtime) {
+        //check if in output range
+        if (std::get<0>(i) >= this->inputSize && std::get<0>(i) < this->inputSize + this->outputSize) {
+            // add to output
+            outputPrep.push_back(&i);
+        }
+    }
+
+    // correctly order output
+    std::sort(outputPrep.begin(), outputPrep.end());
+
+    // load into output 
+    for (auto i : outputPrep) {
+        output.push_back(std::get<1>(*i));
+    }
+
+    return output;
 }
 
 // Just return memory nicely

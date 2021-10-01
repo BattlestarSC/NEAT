@@ -51,14 +51,14 @@ public: // needs to be public for testing
     void crossover(individual* parentA, individual* parentB);
     void mutate();
     // make life easy during feeding, this is the activation function
-    double activate();
+    double activate(double in);
     // make life easy, THIS IS ONLY FOR CREATING A NEW CONNECTION VIA MUTATION
     struct connection* mutateConnection(unsigned long long int inNode = 0, unsigned long long int outNode = 0, double weight = 0.0);
 
     // activation functions
-    double sigmoid();
-    double steepSigmoid();
-    double relu();
-    double linear();
-    double oneThreshold();
+    double sigmoid(double i);
+    double steepSigmoid(double i);
+    double relu(double i);
+    double linear(double i);
+    double oneThreshold(double i);
 };
