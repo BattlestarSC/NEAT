@@ -15,6 +15,7 @@ public:
 	void addConnection(connection* add);
 	double getOutput();
 	void feedConnection(unsigned long long int inputID, double input);
+	int getEnabledConnectionsCount();
 
 	~node();
 };

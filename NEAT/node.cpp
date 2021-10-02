@@ -33,6 +33,17 @@ void node::feedConnection(unsigned long long int inputID, double input)
 {
 }
 
+int node::getEnabledConnectionsCount()
+{
+	int result{ 0 };
+	for (auto* c : this->connections) {
+		if (c->enabled) {
+			result++;
+		}
+	}
+	return result;
+}
+
 node::~node()
 {
 	// clear memory
