@@ -51,6 +51,7 @@ individual::individual(individual* cloneParent, bool mutate) {
         auto* con = new struct connection;
         con->inputNode = i->inputNode;
         con->outputNode = i->outputNode;
+        con->innovationNumber = i->innovationNumber;
         con->weight = i->weight;
         con->enable = i->enable;
         this->connections.push_back(con);
@@ -80,6 +81,7 @@ individual::individual(individual* parentA, individual* parentB, bool mutate) {
         auto* con = new struct connection;
         con->inputNode = i->inputNode;
         con->outputNode = i->outputNode;
+        con->innovationNumber = i->innovationNumber;
         con->weight = i->weight;
         con->enable = i->enable;
         this->connections.push_back(con);
@@ -324,6 +326,17 @@ connection* individual::mutateConnection(unsigned long long int inNode, unsigned
             if (c->outputNode == oNode) {
                 continue;
             }
+            // Deep duplicate check
+            bool dup{ false };
+            for (auto* cc : this->connections) {
+                if (cc->outputNode == oNode && cc->inputNode == c->inputNode) {
+                    dup = true;
+                    break;
+                }
+            }
+            if (dup) {
+                continue;
+            }
             // too far in genome check
             if (c->inputNode == oNode) {
                 break;
@@ -342,11 +355,22 @@ connection* individual::mutateConnection(unsigned long long int inNode, unsigned
         // remove duplicates
        // gotta love stack overflow copy/paste
        // https://stackoverflow.com/questions/1041620/whats-the-most-efficient-way-to-erase-duplicates-and-sort-a-vector
-        std::sort(validOutput.begin(), validOutput.end());
-        validOutput.erase(std::unique(validOutput.begin(), validOutput.end()), validOutput.end());
+        std::sort(validInput.begin(), validInput.end());
+        validInput.erase(std::unique(validInput.begin(), validInput.end()), validInput.end());
+
+        // since we are failing test cases, it doesn't hurt to double check
+        if (validInput.size() == 0) {
+            return nullptr;
+        }
 
         // pick 
         iNode = validInput[rand() % validInput.size()];
+
+        // Maybe these testcase failures are caused by a loop somehow?
+        // try this catch case
+        if (iNode == oNode) {
+            return nullptr; // no possible new connection
+        }
     }
 
     // build the new connection

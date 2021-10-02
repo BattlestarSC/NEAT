@@ -3,7 +3,7 @@
   <Executable>D:\VisualStudioProjects\NEAT\NEAT\x64\Debug\NEAT_test.exe</Executable>
   <TestDurations>
     <TestDuration Test="TestCaseTEST.TestTestProgram" Duration="1" />
-    <TestDuration Test="TestIndividualCreation.TestIndividualNew" Duration="2" />
+    <TestDuration Test="TestIndividualCreation.TestIndividualNew" Duration="1" />
     <TestDuration Test="TestIndividualCreation.TestIndividualCopu" Duration="1" />
     <TestDuration Test="mutateConnectionFunctional.mutateConnection" Duration="1" />
   </TestDurations>
