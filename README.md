@@ -5,59 +5,34 @@
 
 **Connections** 
 
-see: individual.h
+see: connection.h
 
-These are represented by a structure that contains all the relevant data 
+These are represented by a dummy class with included data
 
 ```
-struct connection {
 
 unsigned long long int inputNode;
 
-unsigned long long int outputNode;
+	unsigned long long int outputNode;
 
-double weight;
+	double weight;
 
-bool enable;
+	unsigned long long int innovationNumber;
 
-unsigned long long int innovationNumber;
+	bool enabled;
 
-};
 ```
 **Nodes**
 
-see: individual.h
+see: node.h
 
-These are **not implemented** instead they are based entirely upon connections.
+After refactor, we have a new way of handling these. Each node is an object in an individual. Nodes (except input) are represented by a node in the `connections` `std::vector<node*>`
 
-For example, if we have a very simple network with input and output size of 1, then the input node has an ID of 0 and the output 1. For a node ID 2 to exist, there **must** be an enabled connection with input/output ID's of 0/2. Clearly this state would be useless, but this is not a problem with the NEAT algorithm. 
+The reason for this: Each node contains a `std::vector<connection*>` that contains every connection **where connection->outputNode == this node**. Each node also contains a running total of its weighted inputs. 
 
-Nodes will only be created with a new unique number, like the innovation numbers. This prevents conflicts. 
+To run the graph, each node is in order in the node vector of the individual. Therefore, we can just execute each node in the vector order, since they each contain the entire list of input connections, we can just scan for all required inputs and feed those individually. 
 
-Since all disjoint and excess genes are copied from the more fit parent, and new nodes are formed by breaking a current connection, it is unlikely that useless and non-functional structures will be copied, but this edge case is addressed in the feed forward function.
+To get each node's output, we have to get the node->getOutput() function (which runs the activation funtion as well). 
 
-**All connections must maintain their order to avoid useless sorting and graph cycles**. The idea here is that if the list maintains connection orders, and if everytime a new connections made it is placed in a reasonable location in the list, and if everytime a node is created, the connections retain their order, then we can just run through the connections in order and have a functioning execution graph. 
-Edge cases that break this *may* be possible, but I can't think of a single example. 
+To sort the node order, we just need to ensure each node is before all other nodes that depend on it. Therefore we can also use this order to easily check for valid new connections to mutate, since a new connection would only be valid if it is from an earlier node in the vector and doesn't exist.
 
-**Hyperparameters**
-
-see: hyperSingleton.h
-
-These are constants handled by a singleton. This is done via a singleton rather than globals, and this singleton also tracks innovation and node numbers
-
-*Hyperparameters*
-
-```
-    const float mutateWeights;
-    const float mutateConnections;
-    const float mutateNodes;
-    const float enableConnection;
-    const int populationSize;
-    const double speciesThreshold;
-    const float weightsCoefficient;
-    const float connectionsCoefficient;
-    const float nodesCoefficient;
-    const activationFunction function = activationFunction::steepSigmoid;
-```
-
-These are defined, **in this order**, when the singleton is created. The singleton is defined with list constructor notation, so the parameter names are useless. I'm so so sorry for anyone else reading that and wondering. Only the activation function (parameter `j`) has a defined default.
