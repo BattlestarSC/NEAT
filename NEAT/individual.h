@@ -78,6 +78,12 @@ public:
 	/// </summary>
 	/// <returns>node number</returns>
 	unsigned long long int getNodeNumber();
+	/// <summary>
+	/// Feed data through the graph
+	/// </summary>
+	/// <param name="sense">sensor vector</param>
+	/// <returns></returns>
+	std::vector<double> feed(std::vector<double> sense);
 	/// Free memory on death
 	~individual();
 };

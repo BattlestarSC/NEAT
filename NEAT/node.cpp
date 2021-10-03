@@ -29,10 +29,6 @@ double node::getOutput()
 	return this->activation();
 }
 
-void node::feedConnection(unsigned long long int inputID, double input)
-{
-}
-
 int node::getEnabledConnectionsCount()
 {
 	int result{ 0 };
@@ -42,6 +38,15 @@ int node::getEnabledConnectionsCount()
 		}
 	}
 	return result;
+}
+
+void node::feed(connection* c, double input)
+{
+	// make sure the connection is valid
+	if (c->outputNode == this->ID && *std::find(this->connections.begin(), this->connections.end(), c) == c) {
+		// run it
+		this->sense += input * c->weight;
+	}
 }
 
 node::~node()

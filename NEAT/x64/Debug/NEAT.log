@@ -1,1 +1,11 @@
-﻿
+﻿  pch.cpp
+  connection.cpp
+  individual.cpp
+D:\VisualStudioProjects\NEAT\NEAT\individual.cpp(162,65): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VisualStudioProjects\NEAT\NEAT\individual.cpp(287,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VisualStudioProjects\NEAT\NEAT\individual.cpp(287,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\VisualStudioProjects\NEAT\NEAT\individual.cpp(328,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  node.cpp
+  species.cpp
+  Generating Code...
+  NEAT.vcxproj -> D:\VisualStudioProjects\NEAT\NEAT\x64\Debug\NEAT.lib

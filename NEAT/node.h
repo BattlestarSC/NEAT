@@ -14,8 +14,9 @@ public:
 	node(node* cpy);
 	void addConnection(connection* add);
 	double getOutput();
-	void feedConnection(unsigned long long int inputID, double input);
 	int getEnabledConnectionsCount();
+	// execute the graph, one connection at the time
+	void feed(connection* c, double input);
 
 	~node();
 };

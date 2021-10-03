@@ -295,6 +295,43 @@ std::vector<connection*> individual::mutate(float weightProbability, float conne
 	return output;
 }
 
+/*
+* Execute the graph, linearly
+*/
+std::vector<double> individual::feed(std::vector<double> sense) {
+	if (sense.size() < this->inputSize) {
+		// invalid sense, just die
+		return std::vector<double>{};
+	}
+	// linear execution
+	for (auto* n : this->nodes) {
+		// run each connection
+		for (auto* c : n->connections) {
+			// check if we have a sensor input
+			if (c->inputNode < this->inputSize) {
+				n->feed(c, sense[c->inputNode]);
+			}
+			else {
+				node* inNode = nullptr;
+				for (auto* sn : this->nodes) {
+					if (sn->ID == c->inputNode) {
+						inNode = sn;
+					}
+				}
+				n->feed(c, inNode->getOutput());
+			}
+		}
+	}
+	// since we can assume that the output nodes are last unless something is REALLY fucked
+	std::vector<double> output{};
+	auto startInd = this->nodes.size() - this->outputSize; // Example, if we have 5 nodes, and the last two are output, we want to start on index 3
+	for (int i = startInd; i < this->nodes.size(); i++) {
+		auto out = this->nodes[i]->getOutput();
+		output.push_back(out);
+	}
+	return output;
+}
+
 // just clean dynamic memory
 individual::~individual()
 {
