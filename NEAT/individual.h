@@ -4,6 +4,17 @@
 #include "node.h"
 #include "connection.h"
 
+// This is for sharing runtime data
+// we pass this to each individual as a pointer
+struct runtimeParameters {
+	// current innovation number
+	unsigned long long int innovationNumber;
+	// current node number
+	unsigned long long int nodeNumber;
+	// a list of all connections newly made so we can correct innovation numbers can be unified and corrected later
+	std::vector<connection*> newConnections;
+};
+
 /*
 * All included mutate options use default parameters, for custom probabilities, use false then call manually
 */
@@ -14,6 +25,7 @@ public:
 	std::random_device rd;  // Will be used to obtain a seed for the random number engine
 	std::mt19937 gen{ rd() }; // Standard mersenne_twister_engine seeded with rd()
 
+	struct runtimeParameters* rp = nullptr;
 	double fitness{ 0.0 };
 	std::vector<node*> nodes;
 	int inputSize;

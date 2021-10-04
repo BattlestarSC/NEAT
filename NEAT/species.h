@@ -13,6 +13,7 @@ public:
 	double distanceThreshold;
 	unsigned int populationSize;
 	double totalFitness;
+	struct runtimeParameters* rp;
 
 	/// <summary>
 	/// create a species from parameters and a representative
@@ -23,12 +24,13 @@ public:
 	/// <param name="nc">nodes coefficient from distance function</param>
 	/// <param name="dt">distance threshold of species from distance function</param>
 	/// <param name="ps">max population size (used to determine how many offspring are permitted)</param>
-	species(individual* ind, double wc, double cc, double nc, double dt, unsigned int ps) : representative(ind), 
+	species(individual* ind, double wc, double cc, double nc, double dt, unsigned int ps, struct runtimeParameters* r) : representative(ind), 
 		weightsCoefficient(wc),
 		connectionsCoefficient(cc),
 		nodesCoefficient(nc),
 		distanceThreshold(dt),
-		populationSize(ps){};
+		populationSize(ps),
+		rp(r){};
 
 	/// <summary>
 	/// How far is this individual from this->representative?
@@ -53,7 +55,12 @@ public:
 	/// <returns>vector of babies</returns>
 	std::vector<individual*> spawn(int amount);
 
-private:
+	/// <summary>
+	/// How many of the lower fit individual don't get to reproduce
+	/// </summary>
+	/// <param name="amount"></param>
+	void slaughter(int amount);
+
 	individual representative;
 	std::vector<individual*> members;
 };

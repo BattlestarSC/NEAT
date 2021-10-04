@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "species.h"
+#include <algorithm>
+#include "individual.h"
+#include <vector>
+#include <cmath>
 
 double species::distance(individual* ind)
 {
@@ -17,5 +21,29 @@ bool species::addIndividual(individual* applicant)
 
 std::vector<individual*> species::spawn(int amount)
 {
-	return std::vector<individual*>();
+	std::vector<individual*> newChildren{};
+	for (int i = 0; i < amount; i++) {
+		auto* parentA = this->members[rand() % this->members.size()];
+		auto* parentB = this->members[rand() % this->members.size()];
+		auto* child = new individual(parentA, parentB);
+		child->mutate();
+		newChildren.push_back(child);
+	}
+	return newChildren;
+}
+
+/// <summary>
+/// Sort helper function by parent fitness
+/// /// </summary>
+/// <param name="a">genome a</param>
+/// <param name="b">genome b</param>
+/// <returns>true if a is less than or equal to b</returns>
+bool fitnessSort(individual* a, individual* b) {
+	return (a->fitness <= b->fitness);
+}
+
+void species::slaughter(int amount)
+{
+	std::sort(this->members.begin(), this->members.end(), fitnessSort);
+	this->members.erase(this->members.end() - amount, this->members.end());
 }

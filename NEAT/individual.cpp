@@ -139,13 +139,21 @@ void individual::randomMutateWeights() {
 	}
 }
 
-// TODO: COMPLETE
 unsigned long long int individual::getInnovationNumber() {
+	if (this->rp != nullptr) {
+		auto in = this->rp->innovationNumber;
+		this->rp->innovationNumber++;
+		return in;
+	}
 	return 0;
 }
 
-// TODO: COMPLETE
 unsigned long long int individual::getNodeNumber() {
+	if (this->rp != nullptr) {
+		auto nn = this->rp->nodeNumber;
+		this->rp->nodeNumber++;
+		return nn;
+	}
 	return 0;
 }
 
@@ -291,7 +299,11 @@ std::vector<connection*> individual::mutate(float weightProbability, float conne
 	}
 
 	// now handle the new connections
-
+	if (this->rp == nullptr) {
+		for (auto* n : output) {
+			this->rp->newConnections.push_back(n);
+		}
+	}
 	return output;
 }
 
