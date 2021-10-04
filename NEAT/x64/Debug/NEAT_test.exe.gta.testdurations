@@ -6,5 +6,7 @@
     <TestDuration Test="TestIndividualCreation.TestIndividualNew" Duration="1" />
     <TestDuration Test="TestIndividualCreation.TestIndividualCopu" Duration="1" />
     <TestDuration Test="mutateConnectionFunctional.mutateConnection" Duration="1" />
+    <TestDuration Test="ConnectionCopyTest.ConnectionTest" Duration="1" />
+    <TestDuration Test="constructorTest.nodeTest" Duration="0" />
   </TestDurations>
 </GtaTestDurations>

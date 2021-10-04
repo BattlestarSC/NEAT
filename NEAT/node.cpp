@@ -53,6 +53,9 @@ node::~node()
 {
 	// clear memory
 	for (auto* c : this->connections) {
-		delete c;
+		// safety check
+		if (c != nullptr) {
+			delete c;
+		}
 	}
 }

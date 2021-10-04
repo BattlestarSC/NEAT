@@ -5,7 +5,7 @@ TEST(ConnectionCopyTest, ConnectionTest) {
 	// create a new connection and copy it
 	auto* c = new connection{ 1,2,0.5,1,true };
 	// copy it
-	auto d(c);
+	auto* d = new connection{ c };
 	// delete original 
 	delete c;
 	// make sure d works
