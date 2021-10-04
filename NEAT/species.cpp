@@ -7,7 +7,21 @@
 
 double species::distance(individual* ind)
 {
-	return 0.0;
+	if (ind == nullptr || this->representative == nullptr) {
+		// Error
+		return -1;
+	}
+
+	// calculate each factor
+	double weightRep{ 0 }, connectionRep{ 0 }, nodesRep{ 0 },
+		weightInd{ 0 }, connectionInd{ 0 }, nodesInd{ 0 },
+		weightDelta{ 0 }, connectionDelta{ 0 }, nodesDelta{ 0 };
+
+	double output = weightDelta * this->rp->hp.weightsCoefficient;
+	output += connectionDelta * this->rp->hp.connectionsCoefficient;
+	output += nodesDelta * this->rp->hp.nodesCoefficient;
+
+	return output;
 }
 
 bool species::addIndividual(individual* applicant)
@@ -46,4 +60,10 @@ void species::slaughter(int amount)
 {
 	std::sort(this->members.begin(), this->members.end(), fitnessSort);
 	this->members.erase(this->members.end() - amount, this->members.end());
+}
+
+species::~species()
+{
+	// memory cleanup
+	delete this->representative;
 }

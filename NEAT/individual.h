@@ -4,7 +4,7 @@
 #include "node.h"
 #include "connection.h"
 
-struct hyperParameters {
+typedef struct hyperParameters {
 	double connectionEnableChance;
 	double weightPreturbChance;
 	double weightMutationChance;
@@ -15,7 +15,7 @@ struct hyperParameters {
 	double connectionsCoefficient;
 	double nodesCoefficient;
 	double distanceThreshold;
-};
+} hyperParameters;
 
 // This is for sharing runtime data
 // we pass this to each individual as a pointer
@@ -27,7 +27,7 @@ struct runtimeParameters {
 	// a list of all connections newly made so we can correct innovation numbers can be unified and corrected later
 	std::vector<connection*> newConnections;
 	// universal hyperparameters
-	struct hyperParamters* hp;
+	hyperParameters hp;
 };
 
 /*

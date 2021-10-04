@@ -24,7 +24,8 @@ public:
 	/// <param name="nc">nodes coefficient from distance function</param>
 	/// <param name="dt">distance threshold of species from distance function</param>
 	/// <param name="ps">max population size (used to determine how many offspring are permitted)</param>
-	species(individual* ind, double wc, double cc, double nc, double dt, unsigned int ps, struct runtimeParameters* r) : representative(ind), 
+	species(individual* ind, double wc, double cc, double nc, double dt, unsigned int ps, struct runtimeParameters* r) : 
+		representative(new individual(ind)), 
 		weightsCoefficient(wc),
 		connectionsCoefficient(cc),
 		nodesCoefficient(nc),
@@ -61,7 +62,9 @@ public:
 	/// <param name="amount"></param>
 	void slaughter(int amount);
 
-	individual representative;
+	~species();
+
+	individual* representative;
 	std::vector<individual*> members;
 };
 
