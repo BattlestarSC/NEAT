@@ -53,6 +53,7 @@ Each node will have the following functions (not including supporting functions)
 1. addInput(connection*, value): This will add the value of an input times its weight to the node's running talley. Value will have a default value of 0.0, in the event that a memory connection is unable to find a past value (THIS SHOULD CAUSE AN ERROR/TEXT OUTPUT AND KILL OFF THE INDIVIDUAL)
 2. getOutput(past): past is a boolean with a default of false. This returns the result of the activation function with the node's current total. If past is true, we are working with a memory connection, so we use the last outoput instead
 3. Destructor(): Since all connections are unique and allocated upon construction, we need to free all that memory
+4. Reset for next feed(): move output to the historical data and reset the current value to 0
 
 <h4>**Individuals**</h4>
 
