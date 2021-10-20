@@ -3,8 +3,8 @@
 
 <h2>Unsolved</h2>
 
-1. How to properly universally share a singleton without dependency error
-2. How to correct innovation and node numbers 
+1. How to properly universally share a singleton without dependency error. Current plan is to just pass everything down like a freshman CS student, but it seems easiest.
+2. How to correct innovation and node numbers. Current plan is a population vector pointer being passed down like the reminants of the singleton idea
 
 <h3>Design</h3>
 
@@ -29,6 +29,9 @@ These are represented by a dummy class with included data
 	bool memory;
 
 ```
+
+Why is this a class rather than a struct? Quite literally because it takes me 2 less seconds to make this a class and it honestly doesn't make that much of a difference vs a typedef.
+
 <h4>**Nodes**</h4>
 
 see: node.h
