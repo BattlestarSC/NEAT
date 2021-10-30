@@ -1,5 +1,10 @@
 <h1>C++ NEAT implmentation with modification to add memory</h1>
 
+<h3>Definitions/terms</h3>
+
+Forward connection: used for a feed forward only/non-recursive connection, in the forward vector
+
+Memory connection: used for a "RNN-style" connection, that gets its input from the previous graph exectution or 0 if first execution, in the memory vector
 
 <h2>Unsolved</h2>
 
@@ -16,13 +21,13 @@ These are represented by a dummy class with included data
 
 ```
 
-	unsigned long long int inputNode;
+	unsigned long long int input; // shortened from inputNode for ease of typing
 
-	unsigned long long int outputNode;
+	unsigned long long int output; // shortened from outputNode for ease of typing
 
 	double weight;
 
-	unsigned long long int innovationNumber;
+	unsigned long long int innovation; // shortened from innovationNumber for ease of typing
 
 	bool enabled;
 
@@ -45,6 +50,11 @@ To run the graph, each node is in order in the node vector of the individual. Th
 To get each node's output, we have to get the node->getOutput() function (which runs the activation funtion as well). 
 
 To sort the node order, we just need to ensure each node is before all other nodes that depend on it. Therefore we can also use this order to easily check for valid new connections to mutate, since a new connection would only be valid if it is from an earlier node in the vector and doesn't exist.
+
+Connections are sorted in a few manners. 
+
+1. Each connection is in the list of its OUTPUT node's connections, so a forward connection of 1->4 would be in node 4's forward vector
+2. To accelerate sexual reproduction, connections are sorted by lowest innovation number first, so that all nodes and connections are in the same order
 
 Each node will also keep two pieces of data for memory support. 
 
