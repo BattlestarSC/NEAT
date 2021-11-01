@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "node.h"
+#include <algorithm>
 
 #include <vector>
 #include <cmath>
@@ -35,16 +36,61 @@ void node::reset()
 	output = 0;
 }
 
-node::node(std::vector<connection*> connections)
+bool connectionCompare(connection* a, connection* b)
 {
+	// <= rather than < so that in the rare case where some stupid error caused duplicates, no infinate loop is created and order is maintained
+	return (a->innovation <= b->innovation);
 }
 
-node::node(std::vector<connection*> connections, std::vector<connection*> mem)
+void node::sort()
 {
+	// Sort both vectors
+	std::sort(this->forward.begin(), this->forward.end(), connectionCompare);
+	std::sort(this->memory.begin(), this->memory.end(), connectionCompare);
 }
 
+// Initial constructor
+node::node(std::vector<connection*> connections, unsigned long long int ID)
+{
+	id = ID;
+	if (!connections.empty()) {
+		for (connection* c : connections) {
+			forward.push_back(new connection(c));
+		}
+	}
+	// explicitly create an empty vector for my peace of mind, unnecessary
+	this->memory = std::vector<connection*>();
+}
+
+node::node(std::vector<connection*> connections, std::vector<connection*> mem, unsigned long long int ID)
+{
+	id = ID;
+	if (!connections.empty()) {
+		for (connection* c : connections) {
+			forward.push_back(new connection(c));
+		}
+	}
+	if (!memory.empty()) {
+		for (connection* c : memory) {
+			forward.push_back(new connection(c));
+		}
+	}
+}
+
+// Copy constructor
 node::node(node* cpy)
 {
+	id = cpy->id;
+	if (!cpy->forward.empty()) {
+		for (connection* c : cpy->forward) {
+			forward.push_back(new connection(c));
+		}
+	}
+	if (!cpy->memory.empty()) {
+		for (connection* c : cpy->memory) {
+			memory.push_back(new connection(c));
+		}
+	}
 }
 
 /*
@@ -60,18 +106,13 @@ node::~node()
 	}
 }
 
-bool node::connectionCompare(connection* a, connection* b)
-{
-	// <= rather than < so that in the rare case where some stupid error caused duplicates, no infinate loop is created and order is maintained
-	return (a->innovation <= b->innovation);
-}
-
 double node::activation(double v)
 {
 	// The NEAT paper uses a steepened sigmoid to speed training
 	// I'm going to implment a default smoothed sigmoid instead to allow for greater "finesse"
 	// 1 / 1 + e^(-0.125X)
 	// Not sure if it will work that way or not, but worth a try
+	// This is a "intuitive" guess
 	double sigmoid = v * -0.125;
 	sigmoid = exp(sigmoid);
 	sigmoid += 1.0;

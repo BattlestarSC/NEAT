@@ -29,10 +29,12 @@ public:
 	double getOutput(bool past = false);
 	// reset after each network execution
 	void reset();
+	// Sort the connections from external class
+	void sort();
 	// constructor
 	// We manually COPY each and every connection for easy memory management
-	node(std::vector<connection*> connections);
-	node(std::vector<connection*> connections, std::vector<connection*> mem); 
+	node(std::vector<connection*> connections, unsigned long long int ID);
+	node(std::vector<connection*> connections, std::vector<connection*> mem, unsigned long long int ID); 
 	// copy constructor
 	node(node* cpy);
 	// destructor, free all connections
@@ -42,7 +44,8 @@ private:
 	// organize connections
 	// helper function for std::sort
 	// see: https://www.geeksforgeeks.org/sorting-a-vector-in-c/
-	bool connectionCompare(connection* a, connection* b);
+	//bool connectionCompare(connection* a, connection* b);
+	// moved to node.cpp as non-memeber function
 
 	// activation function
 	double activation(double v);

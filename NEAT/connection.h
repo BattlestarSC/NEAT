@@ -19,5 +19,7 @@ public:
 	// C++ list constructor, for ease
 	connection(unsigned long long int in, unsigned long long int out, double w, unsigned long long int inno, bool e, bool m) : input(in), output(out), weight(w), innovation(inno), enabled(e), memory(m) {};
 
+	// copy constructor
+	connection(connection* copy) :input(copy->input), output(copy->output), weight(copy->weight), innovation(copy->innovation), enabled(copy->enabled), memory(copy->memory) {};
 };
 
