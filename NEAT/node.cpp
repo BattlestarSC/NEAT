@@ -42,6 +42,12 @@ bool connectionCompare(connection* a, connection* b)
 	return (a->innovation <= b->innovation);
 }
 
+/*
+* I would like to make this a Radix sort
+* 2 reasons: 
+*		1) Its cool
+*		2) At massive network sizes, it might actually be faster
+*/
 void node::sort()
 {
 	// Sort both vectors

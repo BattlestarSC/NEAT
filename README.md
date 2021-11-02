@@ -79,6 +79,25 @@ Each individual tracks the following relevant variables.
 1. Fitness
 2. Every fitness detail {time alive, ships shot down, etc}
 
+These are tracked in a struct, base defined in individual.h 
+
+```
+struct fitness {
+	double fitness;
+};
+```
+
+Since these are implmentation specific, here is an actual example
+
+```
+struct fitness {
+	double fitness;
+	unsigned long long int timeAlive;
+	unsigned int enemiesKilled;
+	unsigned int octocatsProtected;
+};
+```
+
 Additionally, each individual will, in an extreme effort to avoid using any globals, keep a complete list of all relevant hyper parameters. 
 
 1. percent chance of mutating weights
@@ -92,11 +111,31 @@ Additionally, each individual will, in an extreme effort to avoid using any glob
 9. a unsigned long long int of the most recent innovation number (so that a new connection can be assigned, then this incremented, then corrected after all evolution)
 10. a unsigned long long int of the most recent node number (for the same reason)
 
+These are handled as a shared struct pointer, but the struct is defined here in individual.h; see code comments for additional details
+
+```
+struct hyperparamters {
+	// hyper parameters
+	// these are snake_case to show that they are "constants" and hyperparameters
+	double mutate_weights_chance;
+	double mutate_weights_uniform;
+	double mutate_connection_chance;
+	double mutate_node_chance;
+	double mutate_connection_reenable;
+	std::default_random_engine* generator;
+	std::normal_distribution<double>* distribution;
+	std::vector<connection*> new_connections;
+	std::vector<node*> new_nodes;
+	unsigned long long int* g_next_innovation;
+	unsigned long long int* g_next_node;
+};
+```
+
 Functions:
 
 1. FeedGraph(std::vector<double> input): feed an input through the network and return its output
 2. Destructor(): Since all nodes and connections are unique and allocated upon construction, we need to free all that memory
-3. Reorder network(): Reorder the nodes in the network to ensure a new valid graph and easy reproduction. We order with input nodes first, then we ensure that a node is in the list after all input connections to it are executed but before its first output. To break ties, lower node numbers come first. Connections are reordered in innovation node number order.
+3. Reorder network(): Reorder the nodes in the network to ensure a new valid graph and easy reproduction. We order with input nodes first, then we ensure that a node is in the list after all input connections to it are executed but before its first output. To break ties, lower node numbers come first. Connections are reordered in innovation node number order. If an error is encountered, return false and expect the parent to execute this child
 4. sexual constructor(parentA*, parentB*): this creates a child via crossover and mutation from 2 parents. All disjoint and excess connections are kept. 
 5. crossover(parentA*, parentB*): this performs the crossover function of reproduction. We copy the more fit parent, then go through the list of all less fit parent's nodes and connections. Non-matches are kept, otherwise 50% chance of taking the weight (change the weight and enable bit of the copyied gene). There is a percent chance that a disabled connection will be reenabled.
 6. default constructor(input size, output size): creates a default fully connected network with no memory. Nodes 0...inputSize-1 are input and inputSize...outputSize-1 are output. All innovation numbers are standardized and weights are randomly assigned from a normal distribution with mean of 0 and variance of 1
