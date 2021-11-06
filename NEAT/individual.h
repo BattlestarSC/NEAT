@@ -15,7 +15,7 @@ struct fitness {
 /*
 * Used to share all hyperparameters to avoid using a global
 */
-struct hyperparamters {
+typedef struct hyperparamters {
 	// hyper parameters
 	// these are snake_case to show that they are "constants" and hyperparameters
 	double mutate_weights_chance;
@@ -44,7 +44,7 @@ struct hyperparamters {
 	// shared number pointers (warning: DEFINATELY not thread safe in current state)
 	unsigned long long int* g_next_innovation;
 	unsigned long long int* g_next_node;
-};
+} hyperparameters;
 
 class individual
 {
@@ -57,13 +57,13 @@ public:
 	std::vector<node*> nodes;
 	unsigned int inputSize;
 	unsigned int outputSize;
-	struct hyperparameters* hp;
+	hyperparameters* hp;
 	
 
 	// now all functions
 public:
 	// initial creation
-	individual(int in, int out, struct hyperparameters* s_hp);
+	individual(int in, int out, hyperparameters* s_hp);
 	// sex
 	individual(individual* parentA, individual* parentB);
 	// clone
